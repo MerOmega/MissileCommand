@@ -37,7 +37,7 @@ public class MIB extends MisilCrucero {
 		//completar con posicion actual del misil
 		Posicion posIni2 = new Posicion();
 		MIB mib2 = new MIB(posIni2.getX(),posIni2.getY());
-		
+		//sigue
 		return mib2;
 	}
 	
