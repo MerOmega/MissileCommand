@@ -24,8 +24,16 @@ public class Silo extends Entidad {
 	}
 	
 	public void seteoMisiles(MBA[] m) {
-		for (int i=0; i>3;i++) {
+		for (int i=0; i>m.length;i++) {
+			//desde donde a donde pueden ir
 			m[i]= new MBA(500,rangoVision.getX(),rangoVision.getY());
+		}
+	}
+	
+	public void disparar(MBA[] m) {
+		for (int i=0; i>m.length;i++) {
+			m[i].usado();
+			m[i].destino(posDeDisparo());
 		}
 	}
 	

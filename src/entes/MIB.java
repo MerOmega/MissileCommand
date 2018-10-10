@@ -13,11 +13,12 @@ public class MIB extends MisilCrucero {
 	}
 
 	
-	
+	@Override
 	public void generarUbicacion(double x) {
 		posInicial = new Posicion(Math.random()*x,0);
 		
 	}
+	
 	
 	private Posicion ubiRandom(LinkedList<Entidad> target) {
 		Posicion targetPos = new Posicion();
@@ -30,6 +31,14 @@ public class MIB extends MisilCrucero {
 	public void generarDestino(LinkedList<Entidad> L,double x, double y) {
 		posFinal = ubiRandom(L);
 		
+	}
+	//division del misil
+	public MIB fork() {
+		//completar con posicion actual del misil
+		Posicion posIni2 = new Posicion();
+		MIB mib2 = new MIB(posIni2.getX(),posIni2.getY());
+		
+		return mib2;
 	}
 	
 	

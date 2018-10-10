@@ -4,3 +4,4 @@
 elemnto
 -agregados metodos contructores en Silo, metodo Disparo
 -clase MBA agregada
+-Cambios clase misil, cambios en MIB, metodo fork sin terminar

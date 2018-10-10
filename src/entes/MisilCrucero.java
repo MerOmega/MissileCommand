@@ -11,7 +11,6 @@ public class MisilCrucero extends Misil{
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
 	public void generarUbicacion(double n) {
 		// TODO Auto-generated method stub
 		

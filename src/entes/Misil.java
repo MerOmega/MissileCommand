@@ -48,7 +48,7 @@ public class Misil extends Entidad{
 	}
 
 
-	public void generarUbicacion(double n) {
+	public void generarUbicacion() {
 		
 	}
 	

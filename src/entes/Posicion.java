@@ -29,5 +29,9 @@ public class Posicion {
 		this.y = y;
 	}
 	
+	public String toString() {
+		return "Coord X: " + this.getX() + "\nCoord Y:" + this.getY()+"\n";
+	}
+	
 
 }
