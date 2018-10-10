@@ -1,6 +1,6 @@
 package entes;
 
-public abstract class Misil extends Entidad{
+public class Misil extends Entidad{
 
 	protected Posicion posMin;
 	protected Posicion posMax;
@@ -48,7 +48,9 @@ public abstract class Misil extends Entidad{
 	}
 
 
-	public abstract void generarUbicacion(double n);
+	public void generarUbicacion(double n) {
+		
+	}
 	
 	public void generarDestino() {
 		
