@@ -3,6 +3,7 @@ package entes;
 public class Ciudad extends Entidad{
 	
 	private int puntajeCiudad;
+	private boolean estadoCiudad;
 	
 	public Ciudad(int nivel, double x, double y) {
 		//setea en false que la ciudad esta destruida
@@ -36,6 +37,9 @@ public class Ciudad extends Entidad{
 	
 	//Decremento de misiles
 	public void Actualizar() {
+		if(this.isDestruida()) {
+			this.estadoCiudad=true;
+		}
 		
 	}
 	

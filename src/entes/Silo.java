@@ -5,12 +5,17 @@ public class Silo extends Entidad {
 	private int puntajeMisil;
 	private int cantMisActual;
 	private Posicion rangoVision;
+	private MBA [] mAntibalistico;
 	
 	public Silo(double x, double y, double rx, double ry) {
 		//seteo cant de misiles por silo y ubicacion del silo
 		super(x,y);
 		this.cantMisiles=3;
+		//vector
+		MBA [] mAntibalistico = new MBA[cantMisiles];
+		
 		this.cantMisActual=this.cantMisiles;
+		seteoMisiles(mAntibalistico);
 		setRangoVision(rx,ry);
 	}
 	
@@ -18,19 +23,41 @@ public class Silo extends Entidad {
 		rangoVision = new Posicion(x,y);
 	}
 	
+	public void seteoMisiles(MBA[] m) {
+		for (int i=0; i>3;i++) {
+			m[i]= new MBA(500,rangoVision.getX(),rangoVision.getY());
+		}
+	}
+	
 	//Devuelve la posicion de disparo
-	public Posicion disparar() {
+	public Posicion posDeDisparo() {
 		Posicion posicion = new Posicion(Math.random() * this.rangoVision.getX(),Math.random() * this.rangoVision.getY());
 		return posicion;
 	}
 	
 	public void isDestruido() {
-		super.isDestruida();
+		super.entidadDestuida();
 		System.out.println("Silo" + this.getClass().getSimpleName() + " ha sido destruido!");
 	}
 	
 	public int Puntaje(int puntajeXMisil) {
 		return cantMisActual*puntajeXMisil;
+	}
+	
+	public void soloCuandoTermina() {
+		this.reset();
+	}
+	
+	public void reset() {
+		super.setDestruida();
+	}
+	
+	public void actualizar() {
+		if (super.isDestruida()) {
+			cantMisActual=0;
+		}
+		
+		
 	}
 	
 }

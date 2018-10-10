@@ -7,7 +7,7 @@ public class Misil extends Entidad{
 	protected double velocidad;
     private int puntaje;
 	
-	public Misil(double y1,double x, double y,int puntaje) {
+	public Misil(double y1,double x, double y) {
 		super();
 		posMin = new Posicion(x,y1);
 		posMax = new Posicion(x,y);

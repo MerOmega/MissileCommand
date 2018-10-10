@@ -16,6 +16,10 @@ public class Entidad {
 		destruida=false;
 	}
 	
+	public void setDestruida() {
+		destruida = false;
+	}
+	
 	public void entidadDestuida() {
 		destruida=true;
 	}
@@ -49,9 +53,6 @@ public class Entidad {
 		return destruida;
 	}
 
-	public void setDestruida() {
-		this.destruida = true;
-	}
 
 	public boolean isMostrar() {
 		return mostrar;
