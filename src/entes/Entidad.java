@@ -16,6 +16,7 @@ public class Entidad {
 		destruida = false;
 	}
 
+	// para mas orden
 	public void setDestruida() {
 		destruida = false;
 	}
@@ -24,6 +25,7 @@ public class Entidad {
 		destruida = true;
 	}
 
+	//
 	public Posicion getPosicion() {
 		return posicion;
 	}
