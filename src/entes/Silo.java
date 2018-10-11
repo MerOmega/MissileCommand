@@ -5,67 +5,67 @@ public class Silo extends Entidad {
 	private int puntajeMisil;
 	private int cantMisActual;
 	private Posicion rangoVision;
-	private MBA [] mAntibalistico;
-	
+	private MBA[] mAntibalistico;
+
 	public Silo(double x, double y, double rx, double ry) {
-		//seteo cant de misiles por silo y ubicacion del silo
-		super(x,y);
-		this.cantMisiles=3;
-		//vector
-		MBA [] mAntibalistico = new MBA[cantMisiles];
-		
-		this.cantMisActual=this.cantMisiles;
+		// seteo cant de misiles por silo y ubicacion del silo
+		super(x, y);
+		this.cantMisiles = 3;
+		// vector
+		MBA[] mAntibalistico = new MBA[cantMisiles];
+
+		this.cantMisActual = this.cantMisiles;
 		seteoMisiles(mAntibalistico);
-		setRangoVision(rx,ry);
+		setRangoVision(rx, ry);
 	}
-	
+
 	public void setRangoVision(double x, double y) {
-		rangoVision = new Posicion(x,y);
+		rangoVision = new Posicion(x, y);
 	}
-	
+
 	public void seteoMisiles(MBA[] m) {
-		for (int i=0; i>m.length;i++) {
-			//desde donde a donde pueden ir
-			m[i]= new MBA(500,rangoVision.getX(),rangoVision.getY());
+		for (int i = 0; i > m.length; i++) {
+			// desde donde a donde pueden ir
+			m[i] = new MBA(500, rangoVision.getX(), rangoVision.getY());
 		}
 	}
-	
+
 	public void disparar(MBA[] m) {
-		for (int i=0; i>m.length;i++) {
+		for (int i = 0; i > m.length; i++) {
 			m[i].usado();
 			m[i].destino(posDeDisparo());
 		}
 	}
-	
-	//Devuelve la posicion de disparo
+
+	// Devuelve la posicion de disparo
 	public Posicion posDeDisparo() {
-		Posicion posicion = new Posicion(Math.random() * this.rangoVision.getX(),Math.random() * this.rangoVision.getY());
+		Posicion posicion = new Posicion(Math.random() * this.rangoVision.getX(),
+				Math.random() * this.rangoVision.getY());
 		return posicion;
 	}
-	
+
 	public void isDestruido() {
-		super.entidadDestuida();
+		super.entidadDestruida();
 		System.out.println("Silo" + this.getClass().getSimpleName() + " ha sido destruido!");
 	}
-	
+
 	public int Puntaje(int puntajeXMisil) {
-		return cantMisActual*puntajeXMisil;
+		return cantMisActual * puntajeXMisil;
 	}
-	
+
 	public void soloCuandoTermina() {
 		this.reset();
 	}
-	
+
 	public void reset() {
 		super.setDestruida();
 	}
-	
+
 	public void actualizar() {
 		if (super.isDestruida()) {
-			cantMisActual=0;
+			cantMisActual = 0;
 		}
-		
-		
+
 	}
-	
+
 }

@@ -11,6 +11,7 @@ public class Misil extends Entidad{
 		super();
 		posMin = new Posicion(x,y1);
 		posMax = new Posicion(x,y);
+		this.setPuntaje(5);
 		// TODO Auto-generated constructor stub
 	}
 	
