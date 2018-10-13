@@ -12,3 +12,4 @@ elemnto
 -var destino de tipo posicion agregada a misil protected
 -creada carpeta Bombardero con sus clases
 -agregado metodos en clase gestor, cambios en silo, posible nuevo cambio en radio devision de silo
+-agreada clase Nivel para mejor representacion, cambios en clases anteriores

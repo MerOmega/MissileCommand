@@ -44,7 +44,7 @@ public class Ciudad extends Entidad implements Dibujable {
 	}
 
 	public InformacionDibujable Dibujar() {
-		return super.dibujar();
+		return super.getInformacionDibujable();
 	}
 
 }

@@ -12,23 +12,18 @@ public class Gestor {
 	private boolean nivelTerminado;
 	private boolean juegoTerminado;
 	private int MisilesUsadosEnOleada;
-	private int puntajeTemporal;
 	private int puntajeTotal;
-	private int bonusCity;
 	private Posicion pos;
+	LinkedList<Entidad> estructuras = new LinkedList<Entidad>();
+	Nivel nivel = new Nivel();
 
 	public Gestor(double x, double y) {
 		MisilesPorNivel = (int) (Math.random() * 17 + 12);
-		MisilesUsadosEnOleada = MisilesPorNivel;
-		bonusCity = 10000;
+		this.nivel.setNivel(1);
 		puntajeTotal = 0;
+		// Referente a tamaño de pantalla
 		pos.setX(x);
 		pos.setY(y);
-	}
-
-	public void inicializar() {
-		LinkedList<Entidad> estructuras = new LinkedList<Entidad>();
-
 	}
 
 	public int transferirPuntos() {
@@ -38,7 +33,7 @@ public class Gestor {
 	//
 	public void puntajes() {
 		if (nivelTerminado) {
-			this.puntajeTotal += puntajeTemporal;
+			this.puntajeTotal += nivel.getPuntaje();
 		}
 	}
 	
@@ -50,11 +45,12 @@ public class Gestor {
 		return this.puntajeTotal/bonusCity;
 	}
 
-	private void init(LinkedList<Entidad> estructuras) {
-		initCiudad(estructuras);
-
+	private void init() {
+		initCiudad();
+		initSilo();
 	}
 
+<<<<<<< HEAD
 	private void initCiudad(LinkedList<Entidad> e) {
 		int cantEstructuras = 9;
 		double x = 0;
@@ -77,7 +73,27 @@ public class Gestor {
 			Ciudad ciudad=new Ciudad(rx,y);
 			lCiudades.add(ciudad);
 		}
+=======
+	//// Inicializadores
 
+	private void initSilo() {
+		double visionPantalla = pos.getX() / 3;
+		estructuras.add(new Silo(26, 465, visionPantalla, 0));
+		estructuras.add(new Silo(262, 465, visionPantalla * 2, 0));
+		estructuras.add(new Silo(pos.getX() - 26, pos.getY() - 15, visionPantalla * 3, 0));
+
+	}
+
+	// ver como hacerlo mas eficiente sin depender de una cantidad fija de pantalla
+	private void initCiudad() {
+		estructuras.add(new Ciudad(84, 465));
+		estructuras.add(new Ciudad(142, 465));
+		estructuras.add(new Ciudad(200, 465));
+>>>>>>> 659bf187b3a50ad485c44aeccc13249560c1dd10
+
+		estructuras.add(new Ciudad(320, 465));
+		estructuras.add(new Ciudad(378, 465));
+		estructuras.add(new Ciudad(436, 465));
 	}
 	
 	public void avanzar(){

@@ -48,7 +48,7 @@ public class Misil extends Entidad {
 	}
 
 	@Override
-	public InformacionDibujable dibujar() {
+	public InformacionDibujable getInformacionDibujable() {
 		InformacionDibujable misil = new InformacionDibujable((int) this.destino.getX(), (int) this.destino.getY(),
 				'M');
 		return misil;

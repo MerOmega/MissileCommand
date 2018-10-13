@@ -23,8 +23,8 @@ public class MBInteligente extends MisilCrucero {
 	}
 
 	@Override
-	public InformacionDibujable dibujar() {
-		return super.dibujar();
+	public InformacionDibujable getInformacionDibujable() {
+		return super.getInformacionDibujable();
 	}
 
 	private void ubiRandom(LinkedList<Entidad> target) {

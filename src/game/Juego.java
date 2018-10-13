@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import javax.swing.JOptionPane;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 public class Juego extends Canvas {
@@ -30,9 +31,12 @@ public class Juego extends Canvas {
 		ventana.setLocationRelativeTo(null);
 		ventana.setVisible(true);
 		
-		/*
-		 * mostrar menu; gestor.iniciar(); crear las ciudades; crear silos; nuevo
-		 * jugador;
+		/* 
+		ImageIcon Imag = new ImageIcon("direccion donde esta la imagen");
+		entidad.dibujar(Imag.getImage(),alto,ancho,pos);
+		anchoImagen=Imag.getIconWidth(); metodo para obtener el ancho de la imagen;  
+		altoImagen=Imag.getIconHeight(); metodo para obtener el alto de la imagen;
+		con estos valores voy a poder calcular si chocan o no.
 		 * 
 		 */
 		fin();
