@@ -58,8 +58,8 @@ public class Silo extends Entidad {
 		System.out.println("Silo" + this.getClass().getSimpleName() + " ha sido destruido!");
 	}
 
-	public int Puntaje(int puntajeXMisil) {
-		return cantMisActual * puntajeXMisil;
+	public int getPuntaje() {
+		return cantMisActual;
 	}
 
 	public void soloCuandoTermina() {
@@ -72,7 +72,7 @@ public class Silo extends Entidad {
 
 	public void actualizar() {
 		if (super.isDestruida()) {
-			cantMisActual = 0;
+			seteoMisiles(mAntibalistico, true);
 		}
 
 	}

@@ -16,7 +16,6 @@ public class Gestor {
 	private Posicion pos;
 	double velocidad;
 	static long tiempo;
-
 	static int bonusCity = 10000;
 
 	LinkedList<Entidad> estructuras = new LinkedList<Entidad>();
@@ -24,7 +23,7 @@ public class Gestor {
 	public Gestor(double x, double y) {
 		tiempo = System.nanoTime();
 		init();
-		Nivel nivel = Nivel.getNivel();
+		Nivel nivel = Nivel.getNivel(estructuras);
 		// Referente a tamaño de pantalla
 		pos.setX(x);
 		pos.setY(y);
@@ -49,7 +48,7 @@ public class Gestor {
 
 	//// Inicializadores
 
-	private void initSilo() {
+	public void initSilo() {
 		double visionPantalla = pos.getX() / 3;
 		estructuras.add(new Silo(26, 465, visionPantalla, 0));
 		estructuras.add(new Silo(262, 465, visionPantalla * 2, 0));

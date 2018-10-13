@@ -2,6 +2,8 @@ package gestores;
 
 import java.util.LinkedList;
 
+import entes.Entidad;
+import entes.Estructuras.Silo;
 import entes.Misiles.MBTonto;
 
 public class Nivel {
@@ -16,24 +18,22 @@ public class Nivel {
 	private int puntaje;
 	private int puntBonus;
 	LinkedList<MBTonto> misiles = new LinkedList<MBTonto>();
+	static LinkedList<Entidad> estructuras;
 
 	private Nivel() {
 		puntaje = 0;
-		this.nroNivel = 1;
+		Nivel.nroNivel = 1;
 
 	}
 
-	public static Nivel getNivel() {
+	public static Nivel getNivel(LinkedList<Entidad> estructuras) {
 		if (nivel == null) {
 			nivel = new Nivel();
+			// Recibo las ciudades iniciadas, luego cada vez que termino el nivel verifico
+			// si hay bonus city para reconstruirlas
+			Nivel.estructuras = estructuras;
 		}
 		return nivel;
-	}
-
-	// a definir
-
-	public static int getnroNivel() {
-		return nroNivel;
 	}
 
 	public void initMisiles(double x, double y) {
@@ -42,6 +42,18 @@ public class Nivel {
 			misiles.add(new MBTonto(x, y, false));
 			misiles.get(i).generarDestino();
 		}
+	}
+
+	public void empezarSimulacion() {
+
+	}
+
+	public static int getnroNivel() {
+		return nroNivel;
+	}
+
+	public static void siguienteNivel() {
+		nroNivel++;
 	}
 
 	public boolean isTerminado() {
@@ -56,8 +68,25 @@ public class Nivel {
 		return puntaje;
 	}
 
-	public void setPuntaje(int puntaje) {
-		this.puntaje = puntaje;
+	///////////////////////////////////////////////// Referente a puntajes
+	// para el caso cuando explota los misiles
+	public void setPuntaje(int valor) {
+		this.puntaje += valor;
 	}
+
+	public void setPuntaje() {
+		for (int i = 0; i < Nivel.estructuras.size(); i++) {
+			// Si la clase es silo
+			if (Nivel.estructuras.get(i).getClass().getSimpleName().equals("Silo")) {
+				Silo silo = (Silo) Nivel.estructuras.get(i);
+				this.puntaje = silo.getPuntaje();
+			} else if (Nivel.estructuras.get(i).getClass().getSimpleName().equals("Ciudad")
+					&& Nivel.estructuras.get(i).isDestruida()) {
+				this.puntaje = this.puntaje + Nivel.estructuras.get(i).getPuntaje();
+			}
+		}
+	}
+
+	//////////////////////////////////////////////// Fin Puntaje
 
 }
