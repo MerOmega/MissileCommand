@@ -21,7 +21,7 @@ public class Gestor {
 		MisilesPorNivel = (int) (Math.random() * 17 + 12);
 		this.nivel.setNivel(1);
 		puntajeTotal = 0;
-		// Referente a tamaño de pantalla
+		// Referente a tamaÃ±o de pantalla
 		pos.setX(x);
 		pos.setY(y);
 	}
@@ -37,13 +37,6 @@ public class Gestor {
 		}
 	}
 	
-	private boolean bonusCity(){
-		return this.puntajeTotal/bonusCity>=1;
-	}
-	
-	private int bonus(){
-		return this.puntajeTotal/bonusCity;
-	}
 
 	private void init() {
 		initCiudad();
@@ -51,28 +44,7 @@ public class Gestor {
 	}
 
 <<<<<<< HEAD
-	private void initCiudad(LinkedList<Entidad> e) {
-		int cantEstructuras = 9;
-		double x = 0;
-		double y = 0;
-		int cantSilos = 3;
-		int cantCiudades = 6;
-		double separacionEnX = pos.getY() / cantEstructuras; // 9 es la cantidad de estructuras
-		// por ej la pantalla en y es de 525, es decir que entre ciudad/silo hay un
-		// espacio de 58,3 entre cada uno
-		double ry = 0;
-		double rx = pos.getX() / cantSilos;
-		for (int i = 1; i < 3; i++) {
-			Silo silo = new Silo(x, 440, rx);
-
-		}
-		rx=pos.getX()/cantCiudades;
-		LinkedList<Ciudad> lCiudades=new LinkedList<Ciudad>();
-		lCiudades=null;
-		for(int i=0; i<cantCiudades; i++){
-			Ciudad ciudad=new Ciudad(rx,y);
-			lCiudades.add(ciudad);
-		}
+	
 =======
 	//// Inicializadores
 
