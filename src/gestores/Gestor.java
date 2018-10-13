@@ -8,22 +8,24 @@ import entes.Estructuras.Ciudad;
 import entes.Estructuras.Silo;
 
 public class Gestor {
-	static int MisilesPorNivel;
-	private boolean nivelTerminado;
+
 	private boolean juegoTerminado;
-	private int MisilesUsadosEnOleada;
 	private int puntajeTotal;
 	private Posicion pos;
+	double velocidad;
+	static long tiempo;
+
 	LinkedList<Entidad> estructuras = new LinkedList<Entidad>();
-	Nivel nivel = new Nivel();
 
 	public Gestor(double x, double y) {
-		MisilesPorNivel = (int) (Math.random() * 17 + 12);
-		this.nivel.setNivel(1);
-		puntajeTotal = 0;
+		tiempo = System.nanoTime();
+		init();
+		Nivel nivel = Nivel.getNivel();
 		// Referente a tamaño de pantalla
 		pos.setX(x);
 		pos.setY(y);
+		puntajeTotal = 0;
+
 	}
 
 	public int transferirPuntos() {
@@ -31,21 +33,16 @@ public class Gestor {
 	}
 
 	//
-	public void puntajes() {
-		if (nivelTerminado) {
-			this.puntajeTotal += nivel.getPuntaje();
-		}
+
+	private void setVelocidad() {
+		velocidad = (double) tiempo * (double) nivel.getnroNivel();
 	}
-	
 
 	private void init() {
 		initCiudad();
 		initSilo();
 	}
 
-<<<<<<< HEAD
-	
-=======
 	//// Inicializadores
 
 	private void initSilo() {
@@ -61,21 +58,15 @@ public class Gestor {
 		estructuras.add(new Ciudad(84, 465));
 		estructuras.add(new Ciudad(142, 465));
 		estructuras.add(new Ciudad(200, 465));
->>>>>>> 659bf187b3a50ad485c44aeccc13249560c1dd10
 
 		estructuras.add(new Ciudad(320, 465));
 		estructuras.add(new Ciudad(378, 465));
 		estructuras.add(new Ciudad(436, 465));
 	}
-	
-	public void avanzar(){
-		if(this.bonusCity()){
-			if(this.bonus()>
-		}
-		
-		
+
+	public void avanzar() {
+
 	}
-	
 
 	/*
 	 * if (mib==0) { if (ciudades != 0 || bonus city >=1) { avanzar(){

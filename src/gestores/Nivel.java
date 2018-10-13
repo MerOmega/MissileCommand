@@ -1,30 +1,48 @@
 package gestores;
 
+import java.util.LinkedList;
+
+import entes.Misiles.MBTonto;
+
 public class Nivel {
-	private int nivel;
+	private static Nivel nivel;
+
+	static int MisilesPorNivelmax = 17;
+	static int MisilesPorNivelmin = 12;
+
+	private static int nroNivel;
 	private boolean terminado;
 	private boolean bonusCity;
 	private int puntaje;
 	private int puntBonus;
-	double velocidad;
-	static long tiempo;
 
-	public Nivel() {
+	LinkedList<MBTonto> misiles = new LinkedList<MBTonto>();
+
+	private Nivel() {
 		puntaje = 0;
-		tiempo = System.nanoTime();
+		this.nroNivel = 1;
+
 	}
 
-	// a definir
-	private void setVelocidad() {
-		velocidad = velocidad * (tiempo * nivel);
-	}
-
-	public int getNivel() {
+	public static Nivel getNivel() {
+		if (nivel == null) {
+			nivel = new Nivel();
+		}
 		return nivel;
 	}
 
-	public void setNivel(int nivel) {
-		this.nivel = nivel;
+	// a definir
+
+	public static int getnroNivel() {
+		return nroNivel;
+	}
+
+	public void initMisiles(double x, double y) {
+		int MisilesPorNivel = (int) (Math.random() * MisilesPorNivelmax + MisilesPorNivelmin);
+		for (int i = 0; i < MisilesPorNivel; i++) {
+			misiles.add(new MBTonto(x, y, false));
+			misiles.get(i).generarDestino();
+		}
 	}
 
 	public boolean isTerminado() {
