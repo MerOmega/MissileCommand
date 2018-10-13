@@ -13,3 +13,7 @@ elemnto
 -creada carpeta Bombardero con sus clases
 -agregado metodos en clase gestor, cambios en silo, posible nuevo cambio en radio devision de silo
 -agreada clase Nivel para mejor representacion, cambios en clases anteriores
+----13/10
+-agregados metodos restartcity, inits etc en Gestor
+-se movieron metodos a la clase Nivel, ahora es singleton
+-la lista de ciudades y silos es ahora static

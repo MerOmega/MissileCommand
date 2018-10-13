@@ -13,17 +13,17 @@ public class Gestor {
 
 	private boolean juegoTerminado;
 	private int puntajeTotal;
-	private Posicion pos;
+	private static Posicion pos;
 	double velocidad;
 	static long tiempo;
 	static int bonusCity = 10000;
 
-	LinkedList<Entidad> estructuras = new LinkedList<Entidad>();
+	static LinkedList<Entidad> estructuras = new LinkedList<Entidad>();
 
 	public Gestor(double x, double y) {
 		tiempo = System.nanoTime();
 		init();
-		Nivel nivel = Nivel.getNivel(estructuras);
+		Nivel nivel = Nivel.getNivel();
 		// Referente a tamaño de pantalla
 		pos.setX(x);
 		pos.setY(y);
@@ -41,6 +41,7 @@ public class Gestor {
 		velocidad = (double) tiempo * (double) Nivel.getnroNivel();
 	}
 
+	// Inicializo todo
 	private void init() {
 		initCiudad();
 		initSilo();
@@ -48,7 +49,21 @@ public class Gestor {
 
 	//// Inicializadores
 
-	public void initSilo() {
+	public static void restartCity(LinkedList<Entidad> estructura, int cantidad) {
+		initSilo();
+		while (cantidad != 0) {
+			for (int i = 0; i < estructura.size(); i++) {
+
+				if (estructura.get(i).getClass().getSimpleName().equals("Ciudad")
+						&& estructura.get(i).isDestruida() == true) {
+					estructura.get(i).setDestruida();
+					cantidad--;
+				}
+			}
+		}
+	}
+
+	public static void initSilo() {
 		double visionPantalla = pos.getX() / 3;
 		estructuras.add(new Silo(26, 465, visionPantalla, 0));
 		estructuras.add(new Silo(262, 465, visionPantalla * 2, 0));

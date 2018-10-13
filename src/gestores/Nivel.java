@@ -18,7 +18,7 @@ public class Nivel {
 	private int puntaje;
 	private int puntBonus;
 	LinkedList<MBTonto> misiles = new LinkedList<MBTonto>();
-	static LinkedList<Entidad> estructuras;
+	static LinkedList<Entidad> estructuras = Gestor.estructuras;
 
 	private Nivel() {
 		puntaje = 0;
@@ -26,12 +26,11 @@ public class Nivel {
 
 	}
 
-	public static Nivel getNivel(LinkedList<Entidad> estructuras) {
+	public static Nivel getNivel() {
 		if (nivel == null) {
 			nivel = new Nivel();
 			// Recibo las ciudades iniciadas, luego cada vez que termino el nivel verifico
 			// si hay bonus city para reconstruirlas
-			Nivel.estructuras = estructuras;
 		}
 		return nivel;
 	}
@@ -44,8 +43,13 @@ public class Nivel {
 		}
 	}
 
-	public void empezarSimulacion() {
+	public void reiniciar() {
+		puntaje = puntBonus = 0;
 
+	}
+
+	public void empezarSimulacion() {
+		setPuntaje();
 	}
 
 	public static int getnroNivel() {
@@ -64,11 +68,12 @@ public class Nivel {
 		this.terminado = terminado;
 	}
 
+	///////////////////////////////////////////////// Referente a puntajes
 	public int getPuntaje() {
+		puntaje = puntaje * nroNivel;
 		return puntaje;
 	}
 
-	///////////////////////////////////////////////// Referente a puntajes
 	// para el caso cuando explota los misiles
 	public void setPuntaje(int valor) {
 		this.puntaje += valor;
@@ -85,6 +90,7 @@ public class Nivel {
 				this.puntaje = this.puntaje + Nivel.estructuras.get(i).getPuntaje();
 			}
 		}
+		puntBonus = puntaje / Gestor.bonusCity;
 	}
 
 	//////////////////////////////////////////////// Fin Puntaje
