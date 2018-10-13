@@ -38,13 +38,13 @@ public class Ciudad extends Entidad implements Dibujable {
 	// Decremento de misiles
 	public void Actualizar() {
 		if (this.isDestruida()) {
-
+			
 		}
 
 	}
 
 	public InformacionDibujable Dibujar() {
-		return super.getInformacionDibujable();
+		return super.dibujar();
 	}
 
 }

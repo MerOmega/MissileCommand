@@ -11,5 +11,7 @@ public class Bombardero extends Entidad {
 		// Por defecto tiene posicion y es visible
 		super(x, y);
 	}
+	
+	
 
 }
