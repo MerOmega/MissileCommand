@@ -31,7 +31,9 @@ public class MBTonto extends MisilCrucero implements Dibujable {
 		int valor = (int) (Math.random() * 8);
 		targetPos = target.get(valor).getPosicion();
 		this.destino = targetPos;
-	}
+	}	
+	//esa entidad la tengo que destruir en el caso de que el misil llegue a destino
+	//que podria modificar para poder mandarle al gestor esa entidad?
 
 	public void generarDestino(LinkedList<Entidad> L, double x, double y) {
 		ubiRandom(L);
