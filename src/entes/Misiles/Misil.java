@@ -54,6 +54,11 @@ public class Misil extends Entidad {
 		return misil;
 	}
 
+	@Override
+	public void entidadDestruida() {
+		super.entidadDestruida();
+	}
+
 	public void generarUbicacion() {
 
 	}

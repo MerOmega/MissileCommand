@@ -35,7 +35,7 @@ public class Gestor {
 	//
 
 	private void setVelocidad() {
-		velocidad = (double) tiempo * (double) nivel.getnroNivel();
+		velocidad = (double) tiempo * (double) Nivel.getnroNivel();
 	}
 
 	private void init() {

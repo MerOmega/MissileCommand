@@ -35,7 +35,7 @@ public class Ciudad extends Entidad implements Dibujable {
 		}
 	}
 
-	// Decremento de misiles
+	// Para la parte grafica cuando se destruya hay que actualizar y borrar imagen
 	public void Actualizar() {
 		if (this.isDestruida()) {
 

@@ -15,7 +15,6 @@ public class Nivel {
 	private boolean bonusCity;
 	private int puntaje;
 	private int puntBonus;
-
 	LinkedList<MBTonto> misiles = new LinkedList<MBTonto>();
 
 	private Nivel() {
