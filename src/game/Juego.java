@@ -3,7 +3,7 @@ package game;
 import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Dimension;
-
+import javax.swing.JOptionPane;
 import javax.swing.JFrame;
 
 public class Juego extends Canvas {
@@ -29,13 +29,18 @@ public class Juego extends Canvas {
 		// la ventana en el centro del escritorio
 		ventana.setLocationRelativeTo(null);
 		ventana.setVisible(true);
-
+		
 		/*
 		 * mostrar menu; gestor.iniciar(); crear las ciudades; crear silos; nuevo
 		 * jugador;
 		 * 
 		 */
-
+		fin();
+	}
+	
+	public void fin() {
+		JOptionPane.showMessageDialog(this, "Fin del Juego", "FIN", JOptionPane.YES_NO_OPTION);
+		System.exit(ABORT);
 	}
 
 	public static void main(String[] args) {
