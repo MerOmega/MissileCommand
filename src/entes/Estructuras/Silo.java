@@ -1,5 +1,7 @@
-package entes;
+package entes.Estructuras;
 
+import entes.Entidad;
+import entes.Posicion;
 import entes.Misiles.MBA;
 
 public class Silo extends Entidad {
@@ -9,7 +11,7 @@ public class Silo extends Entidad {
 	private Posicion rangoVision;
 	private MBA[] mAntibalistico;
 
-	public Silo(double x, double y, double rx, double ry) {
+	public Silo(double x, double y, double ry) {
 		// seteo cant de misiles por silo y ubicacion del silo
 		super(x, y);
 		this.cantMisiles = 3;
@@ -18,7 +20,7 @@ public class Silo extends Entidad {
 
 		this.cantMisActual = this.cantMisiles;
 		seteoMisiles(mAntibalistico, false);
-		setRangoVision(rx, ry);
+		setRangoVision(0, ry);
 	}
 
 	public void setRangoVision(double x, double y) {

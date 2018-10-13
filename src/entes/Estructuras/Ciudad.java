@@ -1,5 +1,6 @@
-package entes;
+package entes.Estructuras;
 
+import entes.Entidad;
 import taller2.grafico.Dibujable;
 import taller2.grafico.InformacionDibujable;
 
@@ -7,10 +8,9 @@ public class Ciudad extends Entidad implements Dibujable {
 
 	private int puntajeCiudad;
 
-	public Ciudad(int nivel, double x, double y) {
+	public Ciudad(double x, double y) {
 		// setea en false que la ciudad esta destruida
 		super(x, y);
-		setPuntajesCiudad(nivel);
 		this.setPuntaje(100);
 		// TODO Auto-generated constructor stub
 	}
@@ -18,8 +18,6 @@ public class Ciudad extends Entidad implements Dibujable {
 	public void entidadDestuida() {
 		// completar con lo que pase si se destruye
 		super.entidadDestruida();
-		// elimino imagen de la ciudad
-		super.setMostrar(false);
 		System.out.println("Ciudad" + this.getClass().getSimpleName() + " Destruida!");
 	}
 

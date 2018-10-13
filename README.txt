@@ -10,3 +10,5 @@ elemnto
 -Se cambiaron los misiles a otro paquete para mas comodidad
 -cambio en clases Misil, MisilCrucero, MBI es MBTonto y se creo MBInteligente
 -var destino de tipo posicion agregada a misil protected
+-creada carpeta Bombardero con sus clases
+-agregado metodos en clase gestor, cambios en silo, posible nuevo cambio en radio devision de silo

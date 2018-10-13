@@ -38,9 +38,12 @@ public class Juego extends Canvas {
 
 	}
 
-	private static void main(String[] args) {
+	public static void main(String[] args) {
 		System.out.println("Imprimir");
-		Juego juego = new Juego();
+		for (int i = 0; i < 2; i++) {
+			System.out.println(i);
+		}
+		// Juego juego = new Juego();
 	}
 
 }

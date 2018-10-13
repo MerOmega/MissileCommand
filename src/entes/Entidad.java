@@ -12,23 +12,30 @@ public class Entidad implements Dibujable {
 
 	public Entidad(double x, double y) {
 		this.posicion = new Posicion(x, y);
-		destruida = false;
+		this.setDestruida();
 	}
 
 	public Entidad() {
-		destruida = false;
+		this.setDestruida();
 	}
 
+	///////////////////////////// Acciones de Destruccion
 	// para mas orden
+	// Si la entidad no esta destruida, por defecto se ve
 	public void setDestruida() {
+		mostrar = true;
 		destruida = false;
 	}
 
+	// Si se destruye, no es mas visible
 	public void entidadDestruida() {
+		mostrar = false;
 		destruida = true;
 	}
 
-	//
+	/////////////////////
+
+	//////////////////// Corresponde a posiciones y puntajes
 	public Posicion getPosicion() {
 		return posicion;
 	}
@@ -50,16 +57,14 @@ public class Entidad implements Dibujable {
 		this.puntaje = puntaje;
 	}
 
+	///////////////
+
 	public boolean isDestruida() {
 		return destruida;
 	}
 
 	public boolean isMostrar() {
 		return mostrar;
-	}
-
-	public void setMostrar(boolean mostrar) {
-		this.mostrar = mostrar;
 	}
 
 	public void Actualizar() {
@@ -69,6 +74,7 @@ public class Entidad implements Dibujable {
 	public void Mostrar() {
 
 	}
+	///////////////// Info Dibujable
 
 	public InformacionDibujable dibujar() {
 		InformacionDibujable dibujarEnte = new InformacionDibujable((int) this.getPosicion().getX(),
