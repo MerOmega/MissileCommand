@@ -17,13 +17,12 @@ public class Gestor {
 	private boolean juegoTerminado;
 	private int puntajeTotal;
 	private Posicion pos;
-<<<<<<< HEAD
 	double velocidad;
 	static long tiempo;
 
-=======
+
 	static int bonusCity=10000;
->>>>>>> c87001e8f43ef9a2d53fbef2ece0031de928d5a2
+
 	LinkedList<Entidad> estructuras = new LinkedList<Entidad>();
 
 	public Gestor(double x, double y) {
@@ -52,8 +51,7 @@ public class Gestor {
 		initSilo();
 	}
 
-<<<<<<< HEAD
-=======
+
 
 	private void initCiudad(LinkedList<Entidad> e) {
 		int cantEstructuras = 9;
@@ -79,7 +77,7 @@ public class Gestor {
 		}
 	}
 
->>>>>>> c87001e8f43ef9a2d53fbef2ece0031de928d5a2
+
 	//// Inicializadores
 
 	private void initSilo() {
@@ -95,22 +93,19 @@ public class Gestor {
 		estructuras.add(new Ciudad(84, 465));
 		estructuras.add(new Ciudad(142, 465));
 		estructuras.add(new Ciudad(200, 465));
-<<<<<<< HEAD
-=======
 
->>>>>>> c87001e8f43ef9a2d53fbef2ece0031de928d5a2
 
 		estructuras.add(new Ciudad(320, 465));
 		estructuras.add(new Ciudad(378, 465));
 		estructuras.add(new Ciudad(436, 465));
 	}
-<<<<<<< HEAD
+
 
 	public void avanzar() {
 
 	}
 
-=======
+
 	
 	public void avanzar(){
 		if(this.bonusCity()){
@@ -129,8 +124,7 @@ public class Gestor {
 		Explosion e = new Explosion(b.getPosicion().getX(),b.getPosicion().getY());
 		//tomo como referencia la posicion de b por si se trata de una ciudad o silo;
 	}
-	
->>>>>>> c87001e8f43ef9a2d53fbef2ece0031de928d5a2
+
 	/*
 	 * Una explosion se va a dar cuando dos objetos o dos imagenes diferentes se choquen; 
 	 * la posicion de la explosion se va a dar por el cruce de los objetos, del choque me 
