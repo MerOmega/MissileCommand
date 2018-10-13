@@ -117,14 +117,30 @@ public class Gestor {
 		
 	}
 	
+	public void llegaADestino(Misil a){
+		if(a.getPosicion()==a.getDestino()){
+			//obtener de la estructura de ciudades o silos cual pertenece a esa ubicacion
+			//generarExplosion con el misil y el silo o ciudad
+		}
+	}
 	
-	public void explota(Entidad a, Entidad b){
+	//si el mba llega a destino hay que chequear si hay otro misil en el radio de explosion
+	//de ser asi se destruye tambien el mbi
+	//
+	
+	
+	public void generarExplosion(Entidad a, Entidad b){
+		this.explota(a,b);
+	}
+	
+	private void explota(Entidad a, Entidad b){
 		a.isDestruida();
 		b.isDestruida();
 		Explosion e = new Explosion(b.getPosicion().getX(),b.getPosicion().getY());
 		//tomo como referencia la posicion de b por si se trata de una ciudad o silo;
 	}
-
+	
+	
 	/*
 	 * Una explosion se va a dar cuando dos objetos o dos imagenes diferentes se choquen; 
 	 * la posicion de la explosion se va a dar por el cruce de los objetos, del choque me 
