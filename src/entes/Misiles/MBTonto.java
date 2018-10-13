@@ -48,8 +48,8 @@ public class MBTonto extends MisilCrucero implements Dibujable {
 	}
 
 	@Override
-	public InformacionDibujable dibujar() {
-		return super.dibujar();
+	public InformacionDibujable getInformacionDibujable() {
+		return super.getInformacionDibujable();
 	}
 
 }

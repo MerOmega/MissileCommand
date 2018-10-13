@@ -36,8 +36,8 @@ public class MBA extends Misil implements Dibujable {
 	}
 
 	@Override
-	public InformacionDibujable dibujar() {
-		return super.dibujar();
+	public InformacionDibujable getInformacionDibujable() {
+		return super.getInformacionDibujable();
 	}
 
 }

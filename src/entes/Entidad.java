@@ -76,7 +76,7 @@ public class Entidad implements Dibujable {
 	}
 	///////////////// Info Dibujable
 
-	public InformacionDibujable dibujar() {
+	public InformacionDibujable getInformacionDibujable() {
 		InformacionDibujable dibujarEnte = new InformacionDibujable((int) this.getPosicion().getX(),
 				(int) this.getPosicion().getY(), 'c');
 		return dibujarEnte;

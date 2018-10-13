@@ -11,7 +11,7 @@ public class Silo extends Entidad {
 	private Posicion rangoVision;
 	private MBA[] mAntibalistico;
 
-	public Silo(double x, double y, double ry) {
+	public Silo(double x, double y, double rx, double ry) {
 		// seteo cant de misiles por silo y ubicacion del silo
 		super(x, y);
 		this.cantMisiles = 3;
@@ -20,7 +20,7 @@ public class Silo extends Entidad {
 
 		this.cantMisActual = this.cantMisiles;
 		seteoMisiles(mAntibalistico, false);
-		setRangoVision(0, ry);
+		setRangoVision(rx, ry);
 	}
 
 	public void setRangoVision(double x, double y) {
