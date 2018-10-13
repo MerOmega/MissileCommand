@@ -18,7 +18,8 @@ public class Bombardero extends Entidad {
 
 	/////// Si su posicion inicial es en x 0, se desplaza hasta el otro extremo de
 	/////// la pantalla
-	////// si es al reves, va desde x que es el extremo de la pantalla al otro lado
+	////// si es al reves, va desde x que es el extremo de la pantalla al otro
+	/////// ladoasd
 
 	public void desplazamiento() {
 		if (this.getPosicion().getX() == 0) {

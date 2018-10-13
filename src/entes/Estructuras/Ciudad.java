@@ -38,13 +38,13 @@ public class Ciudad extends Entidad implements Dibujable {
 	// Para la parte grafica cuando se destruya hay que actualizar y borrar imagen
 	public void Actualizar() {
 		if (this.isDestruida()) {
-
+			
 		}
 
 	}
 
 	public InformacionDibujable Dibujar() {
-		return super.getInformacionDibujable();
+		return super.dibujar();
 	}
 
 }
