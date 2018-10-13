@@ -1,6 +1,9 @@
 package entes;
 
-public class Ciudad extends Entidad {
+import taller2.grafico.Dibujable;
+import taller2.grafico.InformacionDibujable;
+
+public class Ciudad extends Entidad implements Dibujable {
 
 	private int puntajeCiudad;
 
@@ -40,6 +43,10 @@ public class Ciudad extends Entidad {
 
 		}
 
+	}
+
+	public InformacionDibujable Dibujar() {
+		return super.dibujar();
 	}
 
 }

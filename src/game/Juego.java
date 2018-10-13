@@ -14,7 +14,7 @@ public class Juego extends Canvas {
 	private static int ANCHO = 525;
 	private static int ALTO = 480;
 	private static final String Nombre = "Missile Commander";
-	
+
 	// una sola instancia del juego le paso ancho y alto
 	private Juego() {
 		setPreferredSize(new Dimension(ANCHO, ALTO));
@@ -29,23 +29,18 @@ public class Juego extends Canvas {
 		// la ventana en el centro del escritorio
 		ventana.setLocationRelativeTo(null);
 		ventana.setVisible(true);
-		
-		/*mostrar menu;
-		 * gestor.iniciar();
-		 * crear las ciudades;
-		* crear silos;
-		* nuevo jugador;
-		* 
-		*/
-	
+
+		/*
+		 * mostrar menu; gestor.iniciar(); crear las ciudades; crear silos; nuevo
+		 * jugador;
+		 * 
+		 */
+
 	}
 
 	private static void main(String[] args) {
 		System.out.println("Imprimir");
 		Juego juego = new Juego();
 	}
-	
-	
-	
 
 }

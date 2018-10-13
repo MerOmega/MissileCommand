@@ -1,5 +1,7 @@
 package entes;
 
+import entes.Misiles.MBA;
+
 public class Silo extends Entidad {
 	final private int cantMisiles;
 	private int puntajeMisil;

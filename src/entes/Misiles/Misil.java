@@ -1,9 +1,14 @@
-package entes;
+package entes.Misiles;
+
+import entes.Entidad;
+import entes.Posicion;
+import taller2.grafico.InformacionDibujable;
 
 public class Misil extends Entidad {
 
 	protected Posicion posMin;
 	protected Posicion posMax;
+	protected Posicion destino;
 	protected double velocidad;
 	private int puntaje;
 
@@ -40,6 +45,13 @@ public class Misil extends Entidad {
 
 	public void setPuntaje(int puntaje) {
 		this.puntaje = puntaje;
+	}
+
+	@Override
+	public InformacionDibujable dibujar() {
+		InformacionDibujable misil = new InformacionDibujable((int) this.destino.getX(), (int) this.destino.getY(),
+				'M');
+		return misil;
 	}
 
 	public void generarUbicacion() {

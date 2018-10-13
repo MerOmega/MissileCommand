@@ -1,6 +1,11 @@
-package entes;
+package entes.Misiles;
 
-public class MBA extends Misil {
+import entes.Entidad;
+import entes.Posicion;
+import taller2.grafico.Dibujable;
+import taller2.grafico.InformacionDibujable;
+
+public class MBA extends Misil implements Dibujable {
 
 	private boolean usado;
 
@@ -22,9 +27,17 @@ public class MBA extends Misil {
 	}
 
 	public Posicion destino(Posicion pos) {
+		// en el recuento de puntos no se toma en cuenta si esta usado
 		this.usado();
+		// protected, esta en la clase Misil
+		this.destino = pos;
 		System.out.println("Misil disparo en la posicion " + pos.toString());
 		return pos;
+	}
+
+	@Override
+	public InformacionDibujable dibujar() {
+		return super.dibujar();
 	}
 
 }

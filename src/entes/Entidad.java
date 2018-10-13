@@ -1,6 +1,9 @@
 package entes;
 
-public class Entidad {
+import taller2.grafico.Dibujable;
+import taller2.grafico.InformacionDibujable;
+
+public class Entidad implements Dibujable {
 	Posicion posicion;
 	private boolean destruida;
 	// Mostrar es proximamente para la visualizacion en pantalla de la imagen
@@ -65,6 +68,12 @@ public class Entidad {
 
 	public void Mostrar() {
 
+	}
+
+	public InformacionDibujable dibujar() {
+		InformacionDibujable dibujarEnte = new InformacionDibujable((int) this.getPosicion().getX(),
+				(int) this.getPosicion().getY(), 'c');
+		return dibujarEnte;
 	}
 
 }
