@@ -33,6 +33,7 @@ public class Gestor {
 		Nivel nivel = Nivel.getNivel();
 
 	}
+	
 
 	public void transferirPuntos() {
 		 this.puntajeTotal+=Nivel.getPuntaje();
@@ -87,6 +88,8 @@ public class Gestor {
 		estructuras.add(new Ciudad(378, 465));
 		estructuras.add(new Ciudad(436, 465));
 	}
+	
+	
 
 	public void avanzar() {
 

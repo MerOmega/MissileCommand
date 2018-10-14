@@ -39,9 +39,9 @@ public class Silo extends Entidad {
 		}
 	}
 
-	public void disparar(MBA[] m) {
-		for (int i = 0; i > m.length; i++) {
-			m[i].destino(posDeDisparo());
+	public void disparar() {
+		for (int i = 0; i > mAntibalistico.length; i++) {
+			mAntibalistico[i].destino(posDeDisparo());
 		}
 	}
 

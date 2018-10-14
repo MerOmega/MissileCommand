@@ -66,17 +66,30 @@ public class Nivel {
 		}
 	}
 	
-	private void rondasDeMisiles() {
+	private void rondaMisilesMba() {
+		for (int i=0;i<estructuras.size();i++) {
+			if(estructuras.get(i).getClass().getSimpleName().equals("Silo")) {
+				Silo silo = (Silo) estructuras.get(i);
+				silo.disparar();
+			}
+		}
+	}
+	
+	public void rondasDeMisiles() {
 			//Devuelve 4 o 3 para la ronda de misiles
 			int i=0;
 			int random = (int) Math.random()*4 +3;
 			while(!misiles.isEmpty()) {
 				misiles.get(i).generarDestino(estructuras, Gestor.getPos().getX(),Gestor.getPos().getY());
+				i++;random--;
+				//al fin de la oleada espera 4 segundos antes de volver a disparar
+				if(random==0) {
 				try {
 					Thread.sleep(4000);
 				} catch (InterruptedException e) {
 					
 					e.printStackTrace();
+				}
 				}
 			}
 			
