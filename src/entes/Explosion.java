@@ -4,8 +4,8 @@ import java.awt.geom.Area;
 
 public class Explosion extends Entidad {
 
-	private Area area;// area va a ser una clase de las librerias la tengo que buscar
-
+	private Image img;
+	
 	@Override
 	public Posicion getPosicion() {
 		// TODO Auto-generated method stub
@@ -23,20 +23,38 @@ public class Explosion extends Entidad {
 		// TODO Auto-generated method stub
 		super.setPosicion(x, y);
 	}
+	
+	private void generarImagen(double x, double y) {
+		
+		
+	}
+
 
 	public Explosion(double x, double y) {
 		super(x, y);
 		generarImagen(x, y);
+		System.out.println("Se ha producido una explosion!");
 	}
-
-	public Area getArea() {
-		return area;
-	}// el gestor va a pedir el area para corroborar si en la misma hay o no una
-		// colision
-
-	public void setArea(Area area) {
-		this.area = area;
+	
+	//No termino todavia de darme cuenta el tipo con el cual deberia devolver el area
+	public void areaExplosion(double x, double y){
+		area(x,y);
 	}
+	
+	private void area(double x, double y){
+		double h=this.getImg().getHeight(null);//Alto de la imagen
+		h/=2;
+		double w=this.getImg().getWidth(null);//Ancho de la imagen
+		w/=2;
+		Posicion p1=new Posicion(x,y-h);//Estas posiciones serian los puntos 
+		Posicion p2=new Posicion(x,y+h);//en pantalla que encierran al area 
+		Posicion p3=new Posicion(x-w,y);//de explosion
+		Posicion p4=new Posicion(x+w,y);
+		
+	} // 
+	
+	
+	
 
 	/*
 	 * private static boolean seChocan(Point2D.Double p1, double r1, Point2D.Double
