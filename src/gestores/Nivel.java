@@ -53,7 +53,8 @@ public class Nivel {
 	}
 
 	private static void empezarSimulacion() {
-		while (Gestor.juegoTerminado != true && Nivel.nroNivel != 3) {
+		while (Gestor.juegoTerminado != true || Nivel.nroNivel != 3) {
+
 			rondasDeMisiles();
 			setPuntaje();
 			Gestor.restartCity(estructuras, puntBonus, puntaje);
@@ -61,7 +62,7 @@ public class Nivel {
 			// Evalua si se completo el nivel con exito o perdio pero tiene una bonus city
 			if (nivelTerminado == true) {
 				siguienteNivel();
-			} else {
+			} else if (Gestor.juegoTerminado != true) {
 				reiniciar();
 			}
 		}
@@ -80,9 +81,8 @@ public class Nivel {
 		// Devuelve 4 o 3 para la ronda de misiles
 		int i = 0;
 		int random = (int) Math.random() * 4 + 3;
-
 		while (i < misiles.size()) {
-			Juego.mnsj(i);
+
 			misiles.get(i).generarDestino(estructuras, Juego.ancho, Juego.largo);
 
 			i++;
@@ -93,7 +93,6 @@ public class Nivel {
 				try {
 					Thread.sleep(4000);
 				} catch (InterruptedException e) {
-
 					e.printStackTrace();
 				}
 			}
@@ -112,7 +111,7 @@ public class Nivel {
 		}
 		if (evaluarEstructuras == true && usarBonus == false) {
 			Gestor.juegoTerminado = true;
-		} else if (evaluarEstructuras == true && usarBonus == true) {
+		} else if (evaluarEstructuras == true) {
 			Nivel.nivelTerminado = true;
 		}
 	}
@@ -144,7 +143,7 @@ public class Nivel {
 				Silo silo = (Silo) Nivel.estructuras.get(i);
 				Nivel.puntaje = silo.getPuntaje();
 			} else if (Nivel.estructuras.get(i).getClass().getSimpleName().equals("Ciudad")
-					&& Nivel.estructuras.get(i).isDestruida()) {
+					&& !Nivel.estructuras.get(i).isDestruida()) {
 				Nivel.puntaje += Nivel.estructuras.get(i).getPuntaje();
 			}
 		}
