@@ -126,18 +126,24 @@ public class Gestor {
 		generarExplosion(ok(area));
 		
 	}
+	
 	private Entidad ok(Posicion[]area){
 		LinkedList<Entidad>aux=this.estructuras;
+		Entidad a =new Entidad();
+		a=null;
 		for(int i=0; i<aux.size();i++){
 			if(!aux.get(i).isDestruida()){
 				if((aux.get(i).getPosicion().getY()>area[0].getY())&&(aux.get(i).getPosicion().getY()<area[1].getY())){
 					if((aux.get(i).getPosicion().getX()>area[2].getX())&&(aux.get(i).getPosicion().getX()<area[3].getX())){
-						return(aux.get(i));
+						a=aux.get(i);
+						return(a);
 					}
 				}
 			}	
-		}		
+		}
+		return(a);
 	}
+	
 	
 	public void terminar() {
 		if (Gestor.juegoTerminado) {
