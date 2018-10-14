@@ -80,8 +80,11 @@ public class Nivel {
 		// Devuelve 4 o 3 para la ronda de misiles
 		int i = 0;
 		int random = (int) Math.random() * 4 + 3;
-		while (!misiles.isEmpty()) {
+
+		while (i < misiles.size()) {
+			Juego.mnsj(i);
 			misiles.get(i).generarDestino(estructuras, Juego.ancho, Juego.largo);
+
 			i++;
 			random--;
 			// al fin de la oleada espera 4 segundos antes de volver a disparar
