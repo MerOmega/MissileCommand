@@ -11,7 +11,8 @@ public class Nivel {
 
 	static int MisilesPorNivelmax = 17;
 	static int MisilesPorNivelmin = 12;
-
+	private static boolean nivelTerminado;
+	private static boolean usarBonus;
 	private static int nroNivel;
 	private static int puntaje;
 	private static int puntBonus;
@@ -26,6 +27,8 @@ public class Nivel {
 	public static Nivel getNivel() {
 		if (nivel == null) {
 			nivel = new Nivel();
+			nivelTerminado = false;
+			usarBonus=false;
 			empezarSimulacion();
 			// Recibo las ciudades iniciadas, luego cada vez que termino el nivel verifico
 			// si hay bonus city para reconstruirlas
@@ -42,6 +45,8 @@ public class Nivel {
 	}
 
 	private static void reiniciar() {
+		usarBonus=false;
+		nivelTerminado=false;
 		puntaje = puntBonus = 0;
 	}
 
@@ -51,7 +56,12 @@ public class Nivel {
 		setPuntaje();
 		Gestor.restartCity(estructuras, puntBonus,puntaje);
 		evaluar();
+		// Evalua si se completo el nivel con exito o perdio pero tiene una bonus city
+		if(nivelTerminado==true) {
 		siguienteNivel();
+		}else {
+			reiniciar();
+		}
 		}
 	}
 	
@@ -63,8 +73,10 @@ public class Nivel {
 				evaluarEstructuras=false;
 			}
 		}
-		if(evaluarEstructuras==true) {
+		if(evaluarEstructuras==true && usarBonus==false) {
 			Gestor.juegoTerminado=true;
+		} else if(evaluarEstructuras==true && usarBonus==true){
+			Nivel.nivelTerminado=true;
 		}
 	}
 
@@ -101,6 +113,9 @@ public class Nivel {
 			}
 		}
 		puntBonus = puntaje / Gestor.bonusCity;
+		if(puntBonus!=0) {
+			usarBonus=true;
+		}
 	}
 
 	//////////////////////////////////////////////// Fin Puntaje
