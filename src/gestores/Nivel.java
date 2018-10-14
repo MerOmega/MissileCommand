@@ -45,6 +45,7 @@ public class Nivel {
 	}
 
 	private static void reiniciar() {
+		initMisiles(Gestor.getPos().getX(),Gestor.getPos().getY());
 		usarBonus=false;
 		nivelTerminado=false;
 		puntaje = puntBonus = 0;
@@ -52,7 +53,7 @@ public class Nivel {
 
 	private static void empezarSimulacion() {
 		while(Gestor.juegoTerminado!=true) {
-		initMisiles(Gestor.getPos().getX(),Gestor.getPos().getY());
+		
 		setPuntaje();
 		Gestor.restartCity(estructuras, puntBonus,puntaje);
 		evaluar();
@@ -63,6 +64,23 @@ public class Nivel {
 			reiniciar();
 		}
 		}
+	}
+	
+	private void rondasDeMisiles() {
+			//Devuelve 4 o 3 para la ronda de misiles
+			int i=0;
+			int random = (int) Math.random()*4 +3;
+			while(!misiles.isEmpty()) {
+				misiles.get(i).generarDestino(estructuras, Gestor.getPos().getX(),Gestor.getPos().getY());
+				try {
+					Thread.sleep(4000);
+				} catch (InterruptedException e) {
+					
+					e.printStackTrace();
+				}
+			}
+			
+		
 	}
 	
 	private static void evaluar() {
