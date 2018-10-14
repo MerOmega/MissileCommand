@@ -13,10 +13,8 @@ public class Nivel {
 	static int MisilesPorNivelmin = 12;
 
 	private static int nroNivel;
-	private boolean terminado;
-	private boolean bonusCity;
-	private int puntaje;
-	private int puntBonus;
+	private static int puntaje;
+	private static int puntBonus;
 	LinkedList<MBTonto> misiles = new LinkedList<MBTonto>();
 	static LinkedList<Entidad> estructuras = Gestor.estructuras;
 
@@ -43,40 +41,49 @@ public class Nivel {
 		}
 	}
 
-	public void reiniciar() {
+	private static void reiniciar() {
 		puntaje = puntBonus = 0;
+		
 
 	}
 
 	public void empezarSimulacion() {
+		while(Gestor.juegoTerminado!=true) {
 		setPuntaje();
+		Gestor.restartCity(estructuras, puntBonus,puntaje);
+		evaluar();
+		siguienteNivel();
+		}
 	}
-
-	public static int getnroNivel() {
-		return nroNivel;
+	
+	public void evaluar() {
+		boolean evaluarEstructuras=true;
+		for(int i=0;i<estructuras.size();i++) {
+			//Hay al menos una ciudad en pie el juego continua
+			if(estructuras.get(i).getClass().getSimpleName().equals("Ciudad") && estructuras.get(i).isDestruida()==false) {
+				evaluarEstructuras=false;
+			}
+		}
+		if(evaluarEstructuras==true) {
+			Gestor.juegoTerminado=true;
+		}
 	}
 
 	public static void siguienteNivel() {
 		nroNivel++;
+		reiniciar();
 	}
 
-	public boolean isTerminado() {
-		return terminado;
-	}
-
-	public void setTerminado(boolean terminado) {
-		this.terminado = terminado;
-	}
-
+	
 	///////////////////////////////////////////////// Referente a puntajes
-	public int getPuntaje() {
+	public static int getPuntaje() {
 		puntaje = puntaje * nroNivel;
 		return puntaje;
 	}
 
 	// para el caso cuando explota los misiles
 	public void setPuntaje(int valor) {
-		this.puntaje += valor;
+		Nivel.puntaje += valor;
 	}
 
 	public void setPuntaje() {
@@ -84,10 +91,10 @@ public class Nivel {
 			// Si la clase es silo
 			if (Nivel.estructuras.get(i).getClass().getSimpleName().equals("Silo")) {
 				Silo silo = (Silo) Nivel.estructuras.get(i);
-				this.puntaje = silo.getPuntaje();
+				Nivel.puntaje = silo.getPuntaje();
 			} else if (Nivel.estructuras.get(i).getClass().getSimpleName().equals("Ciudad")
 					&& Nivel.estructuras.get(i).isDestruida()) {
-				this.puntaje = this.puntaje + Nivel.estructuras.get(i).getPuntaje();
+				Nivel.puntaje += Nivel.estructuras.get(i).getPuntaje();
 			}
 		}
 		puntBonus = puntaje / Gestor.bonusCity;

@@ -8,19 +8,21 @@ import entes.Posicion;
 import entes.Estructuras.Ciudad;
 import entes.Estructuras.Silo;
 import entes.Misiles.Misil;
+import game.Jugador;
 
 public class Gestor {
 
-	private boolean juegoTerminado;
+	public static boolean juegoTerminado;
 	private int puntajeTotal;
 	private static Posicion pos;
 	double velocidad;
 	static long tiempo;
 	static int bonusCity = 10000;
-
+	static Jugador jugador = new Jugador();
 	static LinkedList<Entidad> estructuras = new LinkedList<Entidad>();
 
 	public Gestor(double x, double y) {
+		juegoTerminado=false;
 		tiempo = System.nanoTime();
 		init();
 		Nivel nivel = Nivel.getNivel();
@@ -31,8 +33,11 @@ public class Gestor {
 
 	}
 
-	public int transferirPuntos() {
-		return this.puntajeTotal;
+	public void transferirPuntos() {
+		 this.puntajeTotal+=Nivel.getPuntaje();
+	}
+	public void puntajeTerminado() {
+		jugador.setPuntaje(puntajeTotal);
 	}
 
 	//
@@ -49,7 +54,7 @@ public class Gestor {
 
 	//// Inicializadores
 
-	public static void restartCity(LinkedList<Entidad> estructura, int cantidad) {
+	public static void restartCity(LinkedList<Entidad> estructura, int cantidad,int puntaje) {
 		initSilo();
 		while (cantidad != 0) {
 			for (int i = 0; i < estructura.size(); i++) {
@@ -107,6 +112,16 @@ public class Gestor {
 		Explosion e = new Explosion(b.getPosicion().getX(), b.getPosicion().getY());
 		// tomo como referencia la posicion de b por si se trata de una ciudad o silo;
 	}
+	
+	
+	
+	public void terminar() {
+		if (Gestor.juegoTerminado) {
+			puntajeTerminado();
+		}
+	}
+	
+	
 
 	/*
 	 * Una explosion se va a dar cuando dos objetos o dos imagenes diferentes se
