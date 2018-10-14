@@ -5,7 +5,7 @@ import java.awt.geom.Area;
 public class Explosion extends Entidad {
 
 	private Image img;
-	
+	private Posicion[] areaE;
 	@Override
 	public Posicion getPosicion() {
 		// TODO Auto-generated method stub
@@ -29,30 +29,38 @@ public class Explosion extends Entidad {
 		
 	}
 
+	public Posicion[] getAreaE() {
+		return areaE;
+	}
+
+	public void setAreaE(Posicion[] areaE) {
+		this.areaE = areaE;
+	}
 
 	public Explosion(double x, double y) {
 		super(x, y);
-		generarImagen(x, y);
-		System.out.println("Se ha producido una explosion!");
+		generarImagen(x,y);
+		radioExplosion(x,y);
+		System.out.println("Ha ocurrido una explosion!");
 	}
 	
-	//No termino todavia de darme cuenta el tipo con el cual deberia devolver el area
-	public void areaExplosion(double x, double y){
-		area(x,y);
+
+	public void radioExplosion(double x, double y){
+		radio(x,y);
 	}
 	
-	private void area(double x, double y){
+	private void radio(double x, double y){
 		double h=this.getImg().getHeight(null);//Alto de la imagen
 		h/=2;
 		double w=this.getImg().getWidth(null);//Ancho de la imagen
 		w/=2;
-		Posicion p1=new Posicion(x,y-h);//Estas posiciones serian los puntos 
-		Posicion p2=new Posicion(x,y+h);//en pantalla que encierran al area 
-		Posicion p3=new Posicion(x-w,y);//de explosion
-		Posicion p4=new Posicion(x+w,y);
-		
-	} // 
-	
+		Posicion[]areaE=new Posicion[4];
+		areaE[0]=new Posicion(x,y-h);//Estas posiciones serian los puntos 
+		areaE[1]=new Posicion(x,y+h);//en pantalla que encierran al area 
+		areaE[2]=new Posicion(x-w,y);//de explosion
+		areaE[3]=new Posicion(x+w,y);
+		this.getAreaE(areaE);
+	}
 	
 	
 
