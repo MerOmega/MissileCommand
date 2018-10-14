@@ -32,7 +32,9 @@ public class Silo extends Entidad {
 		if (accion != true) {
 			for (int i = 0; i < cantMisiles; i++) {
 				System.out.println(i);
-				antibalistico.add(new MBA(500, rangoVision.getX(), rangoVision.getY()));
+				MBA mis = new MBA(500, rangoVision.getX(), rangoVision.getY());
+
+				antibalistico.add(mis);
 			}
 		} else {
 			// elimino M
