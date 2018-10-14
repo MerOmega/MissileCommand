@@ -11,7 +11,7 @@ public class Silo extends Entidad {
 	private int puntajeMisil;
 	private int cantMisActual;
 	private Posicion rangoVision;
-	private ArrayList<MBA> antibalistico;
+	private static ArrayList<MBA> antibalistico;
 
 	public Silo(double x, double y, double rx, double ry) {
 		// seteo cant de misiles por silo y ubicacion del silo
@@ -20,8 +20,9 @@ public class Silo extends Entidad {
 		// vector
 		this.cantMisActual = this.cantMisiles;
 		antibalistico = new ArrayList<MBA>();
-		seteoMisiles(false);
 		setRangoVision(rx, ry);
+		seteoMisiles(false);
+
 	}
 
 	public void setRangoVision(double x, double y) {
@@ -31,7 +32,6 @@ public class Silo extends Entidad {
 	public void seteoMisiles(boolean accion) {
 		if (accion != true) {
 			for (int i = 0; i < cantMisiles; i++) {
-				System.out.println(i);
 				MBA mis = new MBA(500, rangoVision.getX(), rangoVision.getY());
 
 				antibalistico.add(mis);

@@ -8,13 +8,13 @@ import entes.Posicion;
 import entes.Estructuras.Ciudad;
 import entes.Estructuras.Silo;
 import entes.Misiles.Misil;
+import game.Juego;
 import game.Jugador;
 
 public class Gestor {
 
 	public static boolean juegoTerminado;
 	private int puntajeTotal;
-	private static Posicion pos;
 	double velocidad;
 	static long tiempo;
 	static int bonusCity = 10000;
@@ -22,21 +22,19 @@ public class Gestor {
 	static LinkedList<Entidad> estructuras = new LinkedList<Entidad>();
 
 	public Gestor(double x, double y) {
-		juegoTerminado=false;
+		juegoTerminado = false;
 		tiempo = System.nanoTime();
 		init();
-		// Referente a tamaño de pantalla
-		pos.setX(x);
-		pos.setY(y);
 		puntajeTotal = 0;
-		//Se crea la instancia y empieza el jego
+		// Se crea la instancia y empieza el jego
 		Nivel nivel = Nivel.getNivel();
 
 	}
 
 	public void transferirPuntos() {
-		 this.puntajeTotal+=Nivel.getPuntaje();
+		this.puntajeTotal += Nivel.getPuntaje();
 	}
+
 	public void puntajeTerminado() {
 		jugador.setPuntaje(puntajeTotal);
 	}
@@ -55,7 +53,7 @@ public class Gestor {
 
 	//// Inicializadores
 
-	public static void restartCity(LinkedList<Entidad> estructura, int cantidad,int puntaje) {
+	public static void restartCity(LinkedList<Entidad> estructura, int cantidad, int puntaje) {
 		initSilo();
 		while (cantidad != 0) {
 			for (int i = 0; i < estructura.size(); i++) {
@@ -70,10 +68,10 @@ public class Gestor {
 	}
 
 	public static void initSilo() {
-		double visionPantalla = pos.getX() / 3;
+		double visionPantalla = Juego.ancho / 3;
 		estructuras.add(new Silo(26, 465, visionPantalla, 0));
 		estructuras.add(new Silo(262, 465, visionPantalla * 2, 0));
-		estructuras.add(new Silo(pos.getX() - 26, pos.getY() - 15, visionPantalla * 3, 0));
+		estructuras.add(new Silo(Juego.ancho - 26, Juego.largo - 15, visionPantalla * 3, 0));
 
 	}
 
@@ -91,11 +89,6 @@ public class Gestor {
 	public void avanzar() {
 
 	}
-	
-
-	public static Posicion getPos() {
-		return pos;
-	}
 
 	public void llegaADestino(Misil a) {
 		// if(a.getPosicion()==a.getDestino()){
@@ -108,51 +101,49 @@ public class Gestor {
 	// de ser asi se destruye tambien el mbi
 	//
 
-	public void generarExplosion(Entidad a, Entidad b) {
-		this.explota(a, b);
+	public void generarExplosion(Entidad a) {
+		this.explota(a);
 	}
 
-	private void explota(Entidad a, Entidad b) {
+	private void explota(Entidad a) {
 		a.isDestruida();
-		b.isDestruida();
-		Explosion e = new Explosion(b.getPosicion().getX(), b.getPosicion().getY());
+		Explosion e = new Explosion(a.getPosicion().getX(), a.getPosicion().getY());
 		verificar(e.getAreaE());
-		//tomo como referencia la posicion de b por si se trata de una ciudad o silo;
 	}
-	
-	public void verificar(Posicion[] area){
-		//este metodo se va a encargar de verificar si hay o no otra Entidad en el area de explosion
-		//si hay una entidad entonces genera otra explosion
-		Entidad e=ok(area);
-		generarExplosion(e);		
-		
+
+	public void verificar(Posicion[] area) {
+		// este metodo se va a encargar de verificar si hay o no otra Entidad en el area
+		// de explosion
+		// si hay una entidad entonces genera otra explosion
+		Entidad e = ok(area);
+		generarExplosion(e);
+
 	}
-	
-	private Entidad ok(Posicion[]area){
-		LinkedList<Entidad>aux=this.estructuras;
-		Entidad a =new Entidad();
-		a=null;
-		for(int i=0; i<aux.size();i++){
-			if(!aux.get(i).isDestruida()){
-				if((aux.get(i).getPosicion().getY()>area[0].getY())&&(aux.get(i).getPosicion().getY()<area[1].getY())){
-					if((aux.get(i).getPosicion().getX()>area[2].getX())&&(aux.get(i).getPosicion().getX()<area[3].getX())){
-						a=aux.get(i);
-						return(a);
+
+	private Entidad ok(Posicion[] area) {
+		LinkedList<Entidad> aux = this.estructuras;
+		Entidad a = new Entidad();
+		a = null;
+		for (int i = 0; i < aux.size(); i++) {
+			if (!aux.get(i).isDestruida()) {
+				if ((aux.get(i).getPosicion().getY() > area[0].getY())
+						&& (aux.get(i).getPosicion().getY() < area[1].getY())) {
+					if ((aux.get(i).getPosicion().getX() > area[2].getX())
+							&& (aux.get(i).getPosicion().getX() < area[3].getX())) {
+						a = aux.get(i);
+						return (a);
 					}
 				}
-			}	
+			}
 		}
-		return(a);
+		return (a);
 	}
-	
-	
+
 	public void terminar() {
 		if (Gestor.juegoTerminado) {
 			puntajeTerminado();
 		}
 	}
-	
-	
 
 	/*
 	 * Una explosion se va a dar cuando dos objetos o dos imagenes diferentes se
