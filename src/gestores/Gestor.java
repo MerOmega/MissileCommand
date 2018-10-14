@@ -123,7 +123,8 @@ public class Gestor {
 	public void verificar(Posicion[] area){
 		//este metodo se va a encargar de verificar si hay o no otra Entidad en el area de explosion
 		//si hay una entidad entonces genera otra explosion
-		generarExplosion(ok(area));
+		Entidad e=ok(area);
+		generarExplosion(e);		
 		
 	}
 	
