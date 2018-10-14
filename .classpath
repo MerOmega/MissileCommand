@@ -6,6 +6,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="A:/Descargas/graficador (1).jar"/>
+	<classpathentry kind="lib" path="C:/Users/Charif/Downloads/graficador (1).jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

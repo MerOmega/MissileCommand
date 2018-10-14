@@ -1,5 +1,7 @@
 package entes.Estructuras;
 
+import java.util.ArrayList;
+
 import entes.Entidad;
 import entes.Posicion;
 import entes.Misiles.MBA;
@@ -9,17 +11,16 @@ public class Silo extends Entidad {
 	private int puntajeMisil;
 	private int cantMisActual;
 	private Posicion rangoVision;
-	private MBA[] mAntibalistico;
+	private ArrayList<MBA> antibalistico;
 
 	public Silo(double x, double y, double rx, double ry) {
 		// seteo cant de misiles por silo y ubicacion del silo
 		super(x, y);
 		this.cantMisiles = 3;
 		// vector
-		MBA[] mAntibalistico = new MBA[cantMisiles];
-
 		this.cantMisActual = this.cantMisiles;
-		seteoMisiles(mAntibalistico, false);
+		antibalistico = new ArrayList<MBA>();
+		seteoMisiles(false);
 		setRangoVision(rx, ry);
 	}
 
@@ -27,21 +28,23 @@ public class Silo extends Entidad {
 		rangoVision = new Posicion(x, y);
 	}
 
-	public void seteoMisiles(MBA[] m, boolean accion) {
+	public void seteoMisiles(boolean accion) {
 		if (accion != true) {
-			for (int i = 0; i > m.length; i++) {
-				// desde donde a donde pueden ir
-				m[i] = new MBA(500, rangoVision.getX(), rangoVision.getY());
+			for (int i = 0; i < cantMisiles; i++) {
+				System.out.println(i);
+				antibalistico.add(new MBA(500, rangoVision.getX(), rangoVision.getY()));
 			}
 		} else {
 			// elimino M
-			m = null;
+			antibalistico.clear();
 		}
 	}
 
 	public void disparar() {
-		for (int i = 0; i > mAntibalistico.length; i++) {
-			mAntibalistico[i].destino(posDeDisparo());
+
+		for (int i = 0; i > antibalistico.size(); i++) {
+
+			antibalistico.get(i).destino(posDeDisparo());
 		}
 	}
 
@@ -54,7 +57,7 @@ public class Silo extends Entidad {
 
 	public void isDestruido() {
 		super.entidadDestruida();
-		seteoMisiles(this.mAntibalistico, true);
+		seteoMisiles(true);
 		System.out.println("Silo" + this.getClass().getSimpleName() + " ha sido destruido!");
 	}
 
@@ -72,7 +75,7 @@ public class Silo extends Entidad {
 
 	public void actualizar() {
 		if (super.isDestruida()) {
-			seteoMisiles(mAntibalistico, true);
+			seteoMisiles(true);
 		}
 
 	}

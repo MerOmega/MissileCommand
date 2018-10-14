@@ -28,7 +28,7 @@ public class Nivel {
 		if (nivel == null) {
 			nivel = new Nivel();
 			nivelTerminado = false;
-			usarBonus=false;
+			usarBonus = false;
 			empezarSimulacion();
 			// Recibo las ciudades iniciadas, luego cada vez que termino el nivel verifico
 			// si hay bonus city para reconstruirlas
@@ -45,69 +45,71 @@ public class Nivel {
 	}
 
 	private static void reiniciar() {
-		initMisiles(Gestor.getPos().getX(),Gestor.getPos().getY());
-		usarBonus=false;
-		nivelTerminado=false;
+		initMisiles(Gestor.getPos().getX(), Gestor.getPos().getY());
+		usarBonus = false;
+		nivelTerminado = false;
 		puntaje = puntBonus = 0;
 	}
 
 	private static void empezarSimulacion() {
-		while(Gestor.juegoTerminado!=true) {
-		
-		setPuntaje();
-		Gestor.restartCity(estructuras, puntBonus,puntaje);
-		evaluar();
-		// Evalua si se completo el nivel con exito o perdio pero tiene una bonus city
-		if(nivelTerminado==true) {
-		siguienteNivel();
-		}else {
-			reiniciar();
-		}
+		while (Gestor.juegoTerminado != true && Nivel.nroNivel != 3) {
+			rondasDeMisiles();
+			setPuntaje();
+			Gestor.restartCity(estructuras, puntBonus, puntaje);
+			evaluar();
+			// Evalua si se completo el nivel con exito o perdio pero tiene una bonus city
+			if (nivelTerminado == true) {
+				siguienteNivel();
+			} else {
+				reiniciar();
+			}
 		}
 	}
-	
-	private void rondaMisilesMba() {
-		for (int i=0;i<estructuras.size();i++) {
-			if(estructuras.get(i).getClass().getSimpleName().equals("Silo")) {
+
+	private static void rondaMisilesMba() {
+		for (int i = 0; i < estructuras.size(); i++) {
+			if (estructuras.get(i).getClass().getSimpleName().equals("Silo")) {
 				Silo silo = (Silo) estructuras.get(i);
 				silo.disparar();
 			}
 		}
 	}
-	
-	public void rondasDeMisiles() {
-			//Devuelve 4 o 3 para la ronda de misiles
-			int i=0;
-			int random = (int) Math.random()*4 +3;
-			while(!misiles.isEmpty()) {
-				misiles.get(i).generarDestino(estructuras, Gestor.getPos().getX(),Gestor.getPos().getY());
-				i++;random--;
-				//al fin de la oleada espera 4 segundos antes de volver a disparar
-				if(random==0) {
+
+	public static void rondasDeMisiles() {
+		// Devuelve 4 o 3 para la ronda de misiles
+		int i = 0;
+		int random = (int) Math.random() * 4 + 3;
+		while (!misiles.isEmpty()) {
+			misiles.get(i).generarDestino(estructuras, Gestor.getPos().getX(), Gestor.getPos().getY());
+			i++;
+			random--;
+			// al fin de la oleada espera 4 segundos antes de volver a disparar
+			if (random == 0) {
+				rondaMisilesMba();
 				try {
 					Thread.sleep(4000);
 				} catch (InterruptedException e) {
-					
+
 					e.printStackTrace();
 				}
-				}
-			}
-			
-		
-	}
-	
-	private static void evaluar() {
-		boolean evaluarEstructuras=true;
-		for(int i=0;i<estructuras.size();i++) {
-			//Hay al menos una ciudad en pie el juego continua
-			if(estructuras.get(i).getClass().getSimpleName().equals("Ciudad") && estructuras.get(i).isDestruida()==false) {
-				evaluarEstructuras=false;
 			}
 		}
-		if(evaluarEstructuras==true && usarBonus==false) {
-			Gestor.juegoTerminado=true;
-		} else if(evaluarEstructuras==true && usarBonus==true){
-			Nivel.nivelTerminado=true;
+
+	}
+
+	private static void evaluar() {
+		boolean evaluarEstructuras = true;
+		for (int i = 0; i < estructuras.size(); i++) {
+			// Hay al menos una ciudad en pie el juego continua
+			if (estructuras.get(i).getClass().getSimpleName().equals("Ciudad")
+					&& estructuras.get(i).isDestruida() == false) {
+				evaluarEstructuras = false;
+			}
+		}
+		if (evaluarEstructuras == true && usarBonus == false) {
+			Gestor.juegoTerminado = true;
+		} else if (evaluarEstructuras == true && usarBonus == true) {
+			Nivel.nivelTerminado = true;
 		}
 	}
 
@@ -120,7 +122,6 @@ public class Nivel {
 		reiniciar();
 	}
 
-	
 	///////////////////////////////////////////////// Referente a puntajes
 	public static int getPuntaje() {
 		puntaje = puntaje * nroNivel;
@@ -144,8 +145,8 @@ public class Nivel {
 			}
 		}
 		puntBonus = puntaje / Gestor.bonusCity;
-		if(puntBonus!=0) {
-			usarBonus=true;
+		if (puntBonus != 0) {
+			usarBonus = true;
 		}
 	}
 

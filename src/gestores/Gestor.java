@@ -22,22 +22,24 @@ public class Gestor {
 	static LinkedList<Entidad> estructuras = new LinkedList<Entidad>();
 
 	public Gestor(double x, double y) {
-		juegoTerminado=false;
+		juegoTerminado = false;
+		pos = new Posicion();
 		tiempo = System.nanoTime();
 		init();
+
 		// Referente a tamaño de pantalla
 		pos.setX(x);
 		pos.setY(y);
 		puntajeTotal = 0;
-		//Se crea la instancia y empieza el jego
+		// Se crea la instancia y empieza el jego
 		Nivel nivel = Nivel.getNivel();
 
 	}
-	
 
 	public void transferirPuntos() {
-		 this.puntajeTotal+=Nivel.getPuntaje();
+		this.puntajeTotal += Nivel.getPuntaje();
 	}
+
 	public void puntajeTerminado() {
 		jugador.setPuntaje(puntajeTotal);
 	}
@@ -56,9 +58,10 @@ public class Gestor {
 
 	//// Inicializadores
 
-	public static void restartCity(LinkedList<Entidad> estructura, int cantidad,int puntaje) {
+	public static void restartCity(LinkedList<Entidad> estructura, int cantidad, int puntaje) {
 		initSilo();
 		while (cantidad != 0) {
+
 			for (int i = 0; i < estructura.size(); i++) {
 
 				if (estructura.get(i).getClass().getSimpleName().equals("Ciudad")
@@ -72,6 +75,7 @@ public class Gestor {
 
 	public static void initSilo() {
 		double visionPantalla = pos.getX() / 3;
+
 		estructuras.add(new Silo(26, 465, visionPantalla, 0));
 		estructuras.add(new Silo(262, 465, visionPantalla * 2, 0));
 		estructuras.add(new Silo(pos.getX() - 26, pos.getY() - 15, visionPantalla * 3, 0));
@@ -80,21 +84,18 @@ public class Gestor {
 
 	// ver como hacerlo mas eficiente sin depender de una cantidad fija de pantalla
 	private void initCiudad() {
-		estructuras.add(new Ciudad(84, 465));
-		estructuras.add(new Ciudad(142, 465));
-		estructuras.add(new Ciudad(200, 465));
+		estructuras.addLast(new Ciudad(84, 465));
+		estructuras.addLast(new Ciudad(142, 465));
+		estructuras.addLast(new Ciudad(200, 465));
 
-		estructuras.add(new Ciudad(320, 465));
-		estructuras.add(new Ciudad(378, 465));
-		estructuras.add(new Ciudad(436, 465));
+		estructuras.addLast(new Ciudad(320, 465));
+		estructuras.addLast(new Ciudad(378, 465));
+		estructuras.addLast(new Ciudad(436, 465));
 	}
-	
-	
 
 	public void avanzar() {
 
 	}
-	
 
 	public static Posicion getPos() {
 		return pos;
@@ -121,16 +122,12 @@ public class Gestor {
 		Explosion e = new Explosion(b.getPosicion().getX(), b.getPosicion().getY());
 		// tomo como referencia la posicion de b por si se trata de una ciudad o silo;
 	}
-	
-	
-	
+
 	public void terminar() {
 		if (Gestor.juegoTerminado) {
 			puntajeTerminado();
 		}
 	}
-	
-	
 
 	/*
 	 * Una explosion se va a dar cuando dos objetos o dos imagenes diferentes se
