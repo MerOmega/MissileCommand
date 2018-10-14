@@ -15,25 +15,25 @@ public class Nivel {
 	private static int nroNivel;
 	private static int puntaje;
 	private static int puntBonus;
-	LinkedList<MBTonto> misiles = new LinkedList<MBTonto>();
+	static LinkedList<MBTonto> misiles = new LinkedList<MBTonto>();
 	static LinkedList<Entidad> estructuras = Gestor.estructuras;
 
 	private Nivel() {
 		puntaje = 0;
 		Nivel.nroNivel = 1;
-
 	}
 
 	public static Nivel getNivel() {
 		if (nivel == null) {
 			nivel = new Nivel();
+			empezarSimulacion();
 			// Recibo las ciudades iniciadas, luego cada vez que termino el nivel verifico
 			// si hay bonus city para reconstruirlas
 		}
 		return nivel;
 	}
 
-	public void initMisiles(double x, double y) {
+	private static void initMisiles(double x, double y) {
 		int MisilesPorNivel = (int) (Math.random() * MisilesPorNivelmax + MisilesPorNivelmin);
 		for (int i = 0; i < MisilesPorNivel; i++) {
 			misiles.add(new MBTonto(x, y, false));
@@ -43,12 +43,11 @@ public class Nivel {
 
 	private static void reiniciar() {
 		puntaje = puntBonus = 0;
-		
-
 	}
 
-	public void empezarSimulacion() {
+	private static void empezarSimulacion() {
 		while(Gestor.juegoTerminado!=true) {
+		initMisiles(Gestor.getPos().getX(),Gestor.getPos().getY());
 		setPuntaje();
 		Gestor.restartCity(estructuras, puntBonus,puntaje);
 		evaluar();
@@ -56,7 +55,7 @@ public class Nivel {
 		}
 	}
 	
-	public void evaluar() {
+	private static void evaluar() {
 		boolean evaluarEstructuras=true;
 		for(int i=0;i<estructuras.size();i++) {
 			//Hay al menos una ciudad en pie el juego continua
@@ -67,6 +66,10 @@ public class Nivel {
 		if(evaluarEstructuras==true) {
 			Gestor.juegoTerminado=true;
 		}
+	}
+
+	public static int getnroNivel() {
+		return nroNivel;
 	}
 
 	public static void siguienteNivel() {
@@ -86,7 +89,7 @@ public class Nivel {
 		Nivel.puntaje += valor;
 	}
 
-	public void setPuntaje() {
+	public static void setPuntaje() {
 		for (int i = 0; i < Nivel.estructuras.size(); i++) {
 			// Si la clase es silo
 			if (Nivel.estructuras.get(i).getClass().getSimpleName().equals("Silo")) {

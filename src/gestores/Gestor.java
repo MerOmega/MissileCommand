@@ -25,11 +25,12 @@ public class Gestor {
 		juegoTerminado=false;
 		tiempo = System.nanoTime();
 		init();
-		Nivel nivel = Nivel.getNivel();
 		// Referente a tamaño de pantalla
 		pos.setX(x);
 		pos.setY(y);
 		puntajeTotal = 0;
+		//Se crea la instancia y empieza el jego
+		Nivel nivel = Nivel.getNivel();
 
 	}
 
@@ -89,6 +90,11 @@ public class Gestor {
 
 	public void avanzar() {
 
+	}
+	
+
+	public static Posicion getPos() {
+		return pos;
 	}
 
 	public void llegaADestino(Misil a) {

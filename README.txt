@@ -17,3 +17,4 @@ elemnto
 -agregados metodos restartcity, inits etc en Gestor
 -se movieron metodos a la clase Nivel, ahora es singleton
 -la lista de ciudades y silos es ahora static
+-cambios en Gestor, cambios en Nivel se hicieron cambios en instancia a variables de clase
