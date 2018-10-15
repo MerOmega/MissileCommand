@@ -1,11 +1,12 @@
 package entes;
 
-import java.awt.geom.Area;
+import java.awt.Image;
 
 public class Explosion extends Entidad {
 
 	private Image img;
 	private Posicion[] areaE;
+
 	@Override
 	public Posicion getPosicion() {
 		// TODO Auto-generated method stub
@@ -23,10 +24,9 @@ public class Explosion extends Entidad {
 		// TODO Auto-generated method stub
 		super.setPosicion(x, y);
 	}
-	
+
 	private void generarImagen(double x, double y) {
-		
-		
+
 	}
 
 	public Posicion[] getAreaE() {
@@ -39,30 +39,32 @@ public class Explosion extends Entidad {
 
 	public Explosion(double x, double y) {
 		super(x, y);
-		generarImagen(x,y);
-		radioExplosion(x,y);
+		generarImagen(x, y);
+		radioExplosion(x, y);
 		System.out.println("Ha ocurrido una explosion!");
 	}
-	
 
-	public void radioExplosion(double x, double y){
-		radio(x,y);
+	public void radioExplosion(double x, double y) {
+		radio(x, y);
 	}
-	
-	private void radio(double x, double y){
-		double h=this.getImg().getHeight(null);//Alto de la imagen
-		h/=2;
-		double w=this.getImg().getWidth(null);//Ancho de la imagen
-		w/=2;
-		Posicion[]areaE=new Posicion[4];
-		areaE[0]=new Posicion(x,y-h);//Estas posiciones serian los puntos 
-		areaE[1]=new Posicion(x,y+h);//en pantalla que encierran al area 
-		areaE[2]=new Posicion(x-w,y);//de explosion
-		areaE[3]=new Posicion(x+w,y);
-		this.getAreaE(areaE);
+
+	private void radio(double x, double y) {
+		double h = this.getImg().getHeight(null);// Alto de la imagen
+		h /= 2;
+		double w = this.getImg().getWidth(null);// Ancho de la imagen
+		w /= 2;
+		Posicion[] areaE = new Posicion[4];
+		areaE[0] = new Posicion(x, y - h);// Estas posiciones serian los puntos
+		areaE[1] = new Posicion(x, y + h);// en pantalla que encierran al area
+		areaE[2] = new Posicion(x - w, y);// de explosion
+		areaE[3] = new Posicion(x + w, y);
+		this.setAreaE(areaE);
 	}
-	
-	
+
+	private Image getImg() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	/*
 	 * private static boolean seChocan(Point2D.Double p1, double r1, Point2D.Double

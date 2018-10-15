@@ -13,6 +13,8 @@ public class Silo extends Entidad {
 	private Posicion rangoVision;
 	private static ArrayList<MBA> antibalistico;
 
+	// inicio silo, con cantidad de misiles, misiles actuales y tanto rango de
+	// vision como destino de los misiles
 	public Silo(double x, double y, double rx, double ry) {
 		// seteo cant de misiles por silo y ubicacion del silo
 		super(x, y);
@@ -29,6 +31,10 @@ public class Silo extends Entidad {
 		rangoVision = new Posicion(x, y);
 	}
 
+	// Setea dependiendo que pasa, false es un inicio normal de silos, mientras que
+	// true significa que fue destruido
+	// y elimina todos los misiles
+
 	public void seteoMisiles(boolean accion) {
 		if (accion != true) {
 			for (int i = 0; i < cantMisiles; i++) {
@@ -42,6 +48,7 @@ public class Silo extends Entidad {
 		}
 	}
 
+	// Les da la ubicacion destino
 	public void disparar() {
 
 		for (int i = 0; i > antibalistico.size(); i++) {
@@ -57,10 +64,18 @@ public class Silo extends Entidad {
 		return posicion;
 	}
 
-	public void isDestruido() {
+	// sobreescribe al padre, agregandole una salida por pantalla y eliminando los
+	// misiles que quedan
+	@Override
+	public void entidadDestruida() {
 		super.entidadDestruida();
 		seteoMisiles(true);
 		System.out.println("Silo" + this.getClass().getSimpleName() + " ha sido destruido!");
+	}
+
+	@Override
+	public boolean isDestruida() {
+		return super.isDestruida();
 	}
 
 	public int getPuntaje() {

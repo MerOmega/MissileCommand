@@ -52,7 +52,7 @@ public class Gestor {
 	}
 
 	//// Inicializadores
-
+	// regenera las ciudades si hay bonus city
 	public static void restartCity(LinkedList<Entidad> estructura, int cantidad, int puntaje) {
 		initSilo();
 		while (cantidad != 0) {
@@ -67,6 +67,7 @@ public class Gestor {
 		}
 	}
 
+	// inicia silos y ciudades, de momento con un tamaño predeterminado
 	public static void initSilo() {
 		double visionPantalla = Juego.ancho / 3;
 		estructuras.add(new Silo(26, 465, visionPantalla, 0));

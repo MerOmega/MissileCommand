@@ -9,6 +9,7 @@ public class Misil extends Entidad {
 	protected Posicion posMin;
 	protected Posicion posMax;
 	protected Posicion destino;
+
 	protected double velocidad;
 	private int puntaje;
 
@@ -17,6 +18,10 @@ public class Misil extends Entidad {
 		posMin = new Posicion(x, y1);
 		posMax = new Posicion(x, y);
 		// TODO Auto-generated constructor stub
+	}
+
+	public Posicion getDestino() {
+		return destino;
 	}
 
 	public Misil() {

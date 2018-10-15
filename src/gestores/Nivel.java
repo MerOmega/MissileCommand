@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import entes.Entidad;
 import entes.Estructuras.Silo;
 import entes.Misiles.MBTonto;
+import entes.Misiles.Misil;
 import game.Juego;
 
 public class Nivel {
@@ -20,11 +21,13 @@ public class Nivel {
 	static LinkedList<MBTonto> misiles = new LinkedList<MBTonto>();
 	static LinkedList<Entidad> estructuras = Gestor.estructuras;
 
+	// Setea el puntaje en 0 y el nivel inicial en 1
 	private Nivel() {
 		puntaje = 0;
 		Nivel.nroNivel = 1;
 	}
 
+	// comienza el nivel, sin bonusCity, indicando que el nivel esta sin terminarse
 	public static Nivel getNivel() {
 		if (nivel == null) {
 			nivel = new Nivel();
@@ -37,6 +40,7 @@ public class Nivel {
 		return nivel;
 	}
 
+	// Inicializa los misiles y les da un destino
 	private static void initMisiles(double x, double y) {
 		int MisilesPorNivel = (int) (Math.random() * MisilesPorNivelmax + MisilesPorNivelmin);
 		for (int i = 0; i < MisilesPorNivel; i++) {
@@ -45,6 +49,7 @@ public class Nivel {
 		}
 	}
 
+	// reconstruye los silos, y verifica bonusCity
 	private static void reiniciar() {
 		initMisiles(Juego.ancho, Juego.largo);
 		usarBonus = false;
@@ -52,6 +57,9 @@ public class Nivel {
 		puntaje = puntBonus = 0;
 	}
 
+	// comenzaria la simulacion, evalua puntajes y setea una ronda de misiles, asi
+	// como si
+	// paso o no la siguiente nivel
 	private static void empezarSimulacion() {
 		while (Gestor.juegoTerminado != true || Nivel.nroNivel != 3) {
 
@@ -68,6 +76,7 @@ public class Nivel {
 		}
 	}
 
+	// rona de mba
 	private static void rondaMisilesMba() {
 		for (int i = 0; i < estructuras.size(); i++) {
 			if (estructuras.get(i).getClass().getSimpleName().equals("Silo")) {
@@ -77,6 +86,8 @@ public class Nivel {
 		}
 	}
 
+	// ronda de entra 3 o 4 misiles, les da und estino y verific a quien alcanzo, e
+	// suna oleada cada 4 segundos aproximadamente
 	public static void rondasDeMisiles() {
 		// Devuelve 4 o 3 para la ronda de misiles
 		int i = 0;
@@ -84,7 +95,7 @@ public class Nivel {
 		while (i < misiles.size()) {
 
 			misiles.get(i).generarDestino(estructuras, Juego.ancho, Juego.largo);
-
+			evaluarDestruccion(misiles.get(i));
 			i++;
 			random--;
 			// al fin de la oleada espera 4 segundos antes de volver a disparar
@@ -100,6 +111,17 @@ public class Nivel {
 
 	}
 
+	// evalua si destruyo silo o ciudad
+	private static void evaluarDestruccion(Misil misil) {
+		for (int i = 0; i < estructuras.size(); i++) {
+			if (misil.getDestino().equals(estructuras.get(i).getPosicion())) {
+				estructuras.get(i).entidadDestruida();
+			}
+		}
+	}
+	// evalua si el juego termino, si quedaron ciudades en pie se tomaria como nivel
+	// terminado, sino termino el juego a menos que haya bonusCity
+
 	private static void evaluar() {
 		boolean evaluarEstructuras = true;
 		for (int i = 0; i < estructuras.size(); i++) {
@@ -111,7 +133,7 @@ public class Nivel {
 		}
 		if (evaluarEstructuras == true && usarBonus == false) {
 			Gestor.juegoTerminado = true;
-		} else if (evaluarEstructuras == true) {
+		} else if (evaluarEstructuras == false) {
 			Nivel.nivelTerminado = true;
 		}
 	}
@@ -120,6 +142,7 @@ public class Nivel {
 		return nroNivel;
 	}
 
+	// pasa al siguiente nivel y reinicia
 	public static void siguienteNivel() {
 		nroNivel++;
 		reiniciar();
@@ -136,6 +159,7 @@ public class Nivel {
 		Nivel.puntaje += valor;
 	}
 
+	// el puntaje se agrega y verifica si hay bonus city disponible
 	public static void setPuntaje() {
 		for (int i = 0; i < Nivel.estructuras.size(); i++) {
 			// Si la clase es silo
